@@ -1,0 +1,31 @@
+-- Exercise 2: The Courses Table
+
+-- Creating a Catalog/Database
+CREATE CATALOG IF NOT EXISTS the;
+
+-- Creating a Schema;
+CREATE SCHEMA IF NOT EXISTS the.course;
+
+-- Creating a Table
+CREATE TABLE IF NOT EXISTS the.course.table
+(course_id INT, 
+course_name STRING,
+department STRING, 
+credits INT);
+
+-- Loading data into the table
+INSERT INTO the.course.table VALUES
+(101, 'SQL Basics', 'IT', 3),
+(102, 'Python', 'IT', 4),
+(103, 'Data Science', 'IT', 4),
+(104, 'Excel', 'Finance', 2),
+(105, 'Statistics', 'HR', 3);
+
+-- Question 6: SHow total credits per department, only for departments with more than 5 total credits.
+SELECT department, SUM(credits) AS total_credits FROM the.course.table GROUP BY department HAVING total_credits>5;
+
+-- Question 7: List all courses that do not have 4 credits
+SELECT course_id, course_name, department, credits FROM the.course.table WHERE credits != 4;
+
+-- Question 8: Show the top 3 courses by credits in descending order
+SELECT course_id, course_name, department, credits FROM the.course.table ORDER BY credits DESC LIMIT 3;
